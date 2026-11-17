@@ -1,4 +1,4 @@
-import { DietaryPreference, CuisineType, CookingTimeOption } from "./recipe";
+import { DietaryPreference, CuisineType } from "./recipe";
 
 export interface MealPlanItem {
   mealType: "Breakfast" | "Lunch" | "Dinner";

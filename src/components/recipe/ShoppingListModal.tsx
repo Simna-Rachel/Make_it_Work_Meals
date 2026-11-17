@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Recipe } from "@/types/recipe";
 import {
   X,
@@ -144,7 +144,7 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
               </div>
               <h3 className="font-bold text-stone-900 mb-1">You have everything!</h3>
               <p className="text-sm text-stone-500 max-w-xs">
-                None of your generated recipes require extra ingredients you don't already have.
+                None of your generated recipes require extra ingredients you don&apos;t already have.
               </p>
               <p className="text-xs text-stone-400 mt-3">
                 You can still add custom items below if needed.

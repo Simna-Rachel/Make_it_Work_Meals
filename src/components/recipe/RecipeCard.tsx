@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Recipe } from "@/types/recipe";
-import { Clock, Flame, Dumbbell, Heart, ArrowUpRight, ChefHat, AlertTriangle } from "lucide-react";
+import { Clock, Flame, Dumbbell, Heart, ArrowUpRight, AlertTriangle } from "lucide-react";
 import confetti from "canvas-confetti";
 
 interface RecipeCardProps {

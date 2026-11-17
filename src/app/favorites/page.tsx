@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/ui/Navbar";
 import { FavoritesView } from "@/components/favorites/FavoritesView";
+import { CookingBar } from "@/components/ui/CookingBar";
 import { useFavorites } from "@/hooks/useFavorites";
 
 export default function FavoritesPage() {
@@ -30,6 +31,8 @@ export default function FavoritesPage() {
           onClearAll={clearAllFavorites}
         />
       </main>
+
+      <CookingBar />
     </div>
   );
 }

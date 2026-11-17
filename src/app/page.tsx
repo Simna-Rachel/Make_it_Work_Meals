@@ -10,7 +10,6 @@ import { FavoritesView } from "@/components/favorites/FavoritesView";
 import { LoadingChef } from "@/components/ui/LoadingChef";
 import { ErrorCard } from "@/components/ui/ErrorCard";
 import { MealPlanModal } from "@/components/mealplan/MealPlanModal";
-import { CookingProvider } from "@/context/CookingContext";
 import { CookingBar } from "@/components/ui/CookingBar";
 import { useFavorites } from "@/hooks/useFavorites";
 import { Recipe, GenerationFilters } from "@/types/recipe";
@@ -200,10 +199,7 @@ export default function Home() {
         </div>
       }
     >
-      {/* CookingProvider wraps everything so timer state survives navigation */}
-      <CookingProvider>
-        <MainContent />
-      </CookingProvider>
+      <MainContent />
     </Suspense>
   );
 }

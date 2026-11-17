@@ -38,9 +38,25 @@ interface CookingContextValue {
 
 const CookingContext = createContext<CookingContextValue | null>(null);
 
+const defaultCookingContextValue: CookingContextValue = {
+  session: null,
+  startCooking: () => {},
+  clearSession: () => {},
+  setTimerRunning: () => {},
+  resetTimer: () => {},
+  toggleStep: () => {},
+  toggleIngredient: () => {},
+  adjustTimer: () => {},
+};
+
 export function useCooking() {
   const ctx = useContext(CookingContext);
-  if (!ctx) throw new Error("useCooking must be used inside CookingProvider");
+  if (!ctx) {
+    if (typeof window !== "undefined") {
+      console.warn("useCooking must be used inside CookingProvider");
+    }
+    return defaultCookingContextValue;
+  }
   return ctx;
 }
 
