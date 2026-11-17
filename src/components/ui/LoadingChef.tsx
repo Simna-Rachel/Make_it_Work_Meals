@@ -1,0 +1,262 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ProduceSvg, ProduceType } from "@/components/intro/ProduceSvg";
+import { Flame, Sparkles } from "lucide-react";
+
+const COOL_MESSAGES = [
+  "Whipping up something delicious...",
+  "Chef AI is in the kitchen...",
+  "Mixing the perfect recipe...",
+  "Cooking magic in progress...",
+  "Turning ingredients into magic...",
+  "Your meal is being crafted...",
+  "Simmering creative flavors...",
+  "Balancing crunch and umami...",
+];
+
+const CHEF_STEPS = [
+  "Inspecting your pantry & fresh items...",
+  "Balancing acidity, richness, and crisp textures...",
+  "Incorporating your special notes & instructions...",
+  "Fine-tuning home-cooking techniques & heat levels...",
+  "Formulating 3 diverse, mouthwatering ideas...",
+  "Writing clear, step-by-step instructions...",
+];
+
+const FLOATING_INGREDIENTS: {
+  type: ProduceType;
+  x: number;
+  y: number;
+  size: number;
+  delay: number;
+  floatY: [number, number, number];
+  rotate: [number, number, number];
+}[] = [
+  {
+    type: "tomato",
+    x: -85,
+    y: -30,
+    size: 38,
+    delay: 0,
+    floatY: [0, -14, 0],
+    rotate: [-8, 12, -8],
+  },
+  {
+    type: "carrot",
+    x: 82,
+    y: -42,
+    size: 40,
+    delay: 0.3,
+    floatY: [0, -18, 0],
+    rotate: [15, -10, 15],
+  },
+  {
+    type: "broccoli",
+    x: -60,
+    y: -80,
+    size: 36,
+    delay: 0.6,
+    floatY: [0, -12, 0],
+    rotate: [-12, 8, -12],
+  },
+  {
+    type: "lemon",
+    x: 70,
+    y: 10,
+    size: 34,
+    delay: 0.9,
+    floatY: [0, -15, 0],
+    rotate: [10, -14, 10],
+  },
+  {
+    type: "chili",
+    x: -80,
+    y: 24,
+    size: 32,
+    delay: 1.2,
+    floatY: [0, -16, 0],
+    rotate: [-15, 10, -15],
+  },
+];
+
+export function LoadingChef() {
+  const [messageIndex, setMessageIndex] = useState(() =>
+    Math.floor(Math.random() * COOL_MESSAGES.length)
+  );
+  const [stepIndex, setStepIndex] = useState(0);
+
+  useEffect(() => {
+    const msgInterval = setInterval(() => {
+      setMessageIndex((prev) => (prev + 1) % COOL_MESSAGES.length);
+    }, 2400);
+
+    const stepInterval = setInterval(() => {
+      setStepIndex((prev) => (prev + 1) % CHEF_STEPS.length);
+    }, 2000);
+
+    return () => {
+      clearInterval(msgInterval);
+      clearInterval(stepInterval);
+    };
+  }, []);
+
+  return (
+    <div className="w-full max-w-lg mx-auto my-10 p-6 sm:p-9 rounded-3xl bg-white/95 backdrop-blur-sm border border-stone-200/90 shadow-2xl shadow-orange-950/5 text-center flex flex-col items-center select-none overflow-hidden relative">
+      {/* Background ambient warm glows */}
+      <div className="absolute -top-12 -left-12 w-40 h-40 bg-orange-200/40 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute -bottom-12 -right-12 w-44 h-44 bg-amber-200/30 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Interactive Animated Cooking Scene with Floating Produce & Stirring Pot */}
+      <div className="relative w-64 h-52 flex items-center justify-center my-2">
+        {/* Floating animated produce items orbiting around the pot */}
+        {FLOATING_INGREDIENTS.map((item, idx) => (
+          <motion.div
+            key={idx}
+            className="absolute z-20 pointer-events-none drop-shadow-md"
+            style={{ x: item.x, y: item.y }}
+            animate={{
+              y: item.floatY.map((fy) => item.y + fy),
+              rotate: item.rotate,
+            }}
+            transition={{
+              duration: 2.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: item.delay,
+            }}
+          >
+            <ProduceSvg type={item.type} size={item.size} />
+          </motion.div>
+        ))}
+
+        {/* Rising Animated Steam Clouds */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 pointer-events-none flex gap-3">
+          <motion.div
+            animate={{ y: [-4, -28], opacity: [0.2, 0.7, 0], scale: [0.8, 1.3] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 0 }}
+            className="w-3 h-8 bg-gradient-to-t from-orange-200/60 to-transparent rounded-full blur-2xs"
+          />
+          <motion.div
+            animate={{ y: [-2, -34], opacity: [0.3, 0.8, 0], scale: [0.9, 1.4] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut", delay: 0.6 }}
+            className="w-4 h-10 bg-gradient-to-t from-amber-200/70 to-transparent rounded-full blur-2xs"
+          />
+          <motion.div
+            animate={{ y: [-4, -28], opacity: [0.2, 0.7, 0], scale: [0.8, 1.2] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut", delay: 1.1 }}
+            className="w-3 h-8 bg-gradient-to-t from-orange-200/60 to-transparent rounded-full blur-2xs"
+          />
+        </div>
+
+        {/* The Cooking Pot with Stirring Ladle */}
+        <div className="relative z-10 mt-12 flex flex-col items-center">
+          {/* Animated Stirring Wooden Spoon / Ladle */}
+          <motion.div
+            className="absolute -top-10 left-1/2 z-20 origin-bottom pointer-events-none"
+            animate={{
+              rotate: [-18, 18, -18],
+              x: [-12, 12, -12],
+              y: [-2, 3, -2],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {/* Wooden Spoon SVG */}
+            <svg width="28" height="60" viewBox="0 0 28 60" fill="none" className="drop-shadow-sm">
+              <rect x="11.5" y="14" width="5" height="42" rx="2.5" fill="#B45309" stroke="#78350F" strokeWidth="1" />
+              <ellipse cx="14" cy="12" rx="10" ry="11" fill="#D97706" stroke="#92400E" strokeWidth="1.2" />
+              <ellipse cx="14" cy="12" rx="7" ry="7.5" fill="#F59E0B" fillOpacity="0.8" />
+            </svg>
+          </motion.div>
+
+          {/* Main Pot Vessel */}
+          <div className="relative w-36 h-22 rounded-b-3xl bg-gradient-to-br from-stone-900 via-stone-800 to-stone-950 p-2 border-2 border-stone-700/80 shadow-xl flex items-center justify-center overflow-hidden">
+            {/* Pot Copper Rim */}
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600 border-b border-amber-400/40" />
+
+            {/* Simmering Liquid Texture inside pot */}
+            <div className="absolute top-2 left-2 right-2 bottom-2 rounded-b-2xl bg-gradient-to-b from-orange-600 via-amber-600 to-amber-800/90 flex items-center justify-center overflow-hidden">
+              {/* Boiling Bubbles */}
+              <motion.div
+                animate={{ scale: [0.6, 1.2, 0.6], opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-3 left-6 w-3 h-3 rounded-full bg-amber-200/70"
+              />
+              <motion.div
+                animate={{ scale: [0.7, 1.3, 0.7], opacity: [0.3, 0.8, 0.3] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                className="absolute top-4 right-8 w-2.5 h-2.5 rounded-full bg-amber-100/80"
+              />
+              <motion.div
+                animate={{ scale: [0.5, 1.1, 0.5], opacity: [0.4, 0.9, 0.4] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+                className="absolute bottom-4 left-10 w-2 h-2 rounded-full bg-white/70"
+              />
+
+              <Sparkles className="w-6 h-6 text-amber-200/70 animate-pulse" />
+            </div>
+
+            {/* Pot Ergonomic Left & Right Metal Handles */}
+            <div className="absolute -left-3.5 top-5 w-4 h-6 rounded-l-lg bg-stone-700 border-l border-stone-500 shadow-sm" />
+            <div className="absolute -right-3.5 top-5 w-4 h-6 rounded-r-lg bg-stone-700 border-r border-stone-500 shadow-sm" />
+          </div>
+
+          {/* Glowing Stovetop Burner Flame */}
+          <div className="mt-1 flex items-center justify-center gap-1">
+            <div className="w-28 h-2 rounded-full bg-gradient-to-r from-transparent via-orange-500 to-transparent blur-xs animate-pulse" />
+          </div>
+        </div>
+      </div>
+
+      {/* Cool Rotating Badge Message */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={messageIndex}
+          initial={{ opacity: 0, y: 8, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8, scale: 0.95 }}
+          transition={{ duration: 0.25 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 text-orange-950 text-xs sm:text-sm font-bold mt-3 border border-orange-200 shadow-xs"
+        >
+          <Flame className="w-4 h-4 text-orange-600 animate-pulse shrink-0" />
+          <span>{COOL_MESSAGES[messageIndex]}</span>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Main Title */}
+      <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight mt-3">
+        Crafting 3 Custom Meals
+      </h3>
+
+      {/* Rotating Subtitle Step */}
+      <div className="h-7 mt-1.5 flex items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={stepIndex}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            transition={{ duration: 0.2 }}
+            className="text-xs sm:text-sm font-semibold text-stone-600 max-w-sm truncate"
+          >
+            {CHEF_STEPS[stepIndex]}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+
+      {/* Shimmering Progress Bar */}
+      <div className="w-56 h-2 bg-stone-100 rounded-full overflow-hidden mt-5 border border-stone-200/60 p-0.5">
+        <motion.div
+          animate={{ x: ["-100%", "100%"] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="w-1/2 h-full bg-gradient-to-r from-orange-500 via-amber-400 to-emerald-500 rounded-full"
+        />
+      </div>
+    </div>
+  );
+}
