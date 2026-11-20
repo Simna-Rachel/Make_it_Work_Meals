@@ -132,15 +132,15 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
     >
       {/* Intro Header */}
       <div className="text-center space-y-2 mb-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-orange-900 text-xs font-bold border border-orange-200">
-          <ChefHat className="w-3.5 h-3.5 text-orange-600" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-900 dark:text-orange-300 text-xs font-bold border border-orange-200 dark:border-orange-800/60">
+          <ChefHat className="w-3.5 h-3.5 text-orange-600 dark:text-orange-400" />
           <span>Step 1: Your Kitchen & Preferences</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-stone-900 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-stone-900 dark:text-stone-100 tracking-tight">
           What&apos;s in your kitchen today?
         </h2>
-        <p className="text-stone-600 text-xs sm:text-sm max-w-lg mx-auto">
-          Everything starts blank. Add your available ingredients and select optional preferences, or tap <span className="font-semibold text-orange-700">Randomize</span> for a surprise setup.
+        <p className="text-stone-600 dark:text-stone-400 text-xs sm:text-sm max-w-lg mx-auto">
+          Everything starts blank. Add your available ingredients and select optional preferences, or tap <span className="font-semibold text-orange-700 dark:text-orange-400">Randomize</span> for a surprise setup.
         </p>
 
         {/* Quick Toolbar: Surprise Me / Reset */}
@@ -148,10 +148,10 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
           <button
             type="button"
             onClick={handleRandomizeOptions}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-orange-50 hover:bg-orange-100 border border-orange-200 text-orange-800 text-xs font-bold transition-all shadow-2xs active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-orange-50 dark:bg-orange-950/40 hover:bg-orange-100 dark:hover:bg-orange-900/60 border border-orange-200 dark:border-orange-800/60 text-orange-800 dark:text-orange-200 text-xs font-bold transition-all shadow-2xs active:scale-95 cursor-pointer"
             title="Populate random ingredients and settings for inspiration"
           >
-            <Dices className="w-4 h-4 text-orange-600" />
+            <Dices className="w-4 h-4 text-orange-600 dark:text-orange-400" />
             <span>🎲 Randomize Options</span>
           </button>
 
@@ -160,8 +160,8 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
             onClick={handleResetAll}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border text-xs font-bold transition-all active:scale-95 cursor-pointer ${
               hasAnySelected
-                ? "bg-rose-50 hover:bg-rose-100 border-rose-200 text-rose-700 shadow-2xs"
-                : "bg-stone-50 hover:bg-stone-100 border-stone-200 text-stone-400"
+                ? "bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/60 border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-300 shadow-2xs"
+                : "bg-stone-50 dark:bg-stone-800/60 hover:bg-stone-100 dark:hover:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-400 dark:text-stone-500"
             }`}
             title="Reset all fields to blank"
           >
@@ -172,7 +172,7 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
       </div>
 
       {/* Main Form Card */}
-      <div className="p-5 sm:p-8 rounded-3xl bg-white border border-stone-200 shadow-xl shadow-orange-950/5 space-y-7">
+      <div className="p-5 sm:p-8 rounded-3xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-xl shadow-orange-950/5 space-y-7 transition-colors duration-200">
         {/* 1. Ingredient Tags Input */}
         <IngredientInput
           ingredients={ingredients}
@@ -182,12 +182,12 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
           }}
         />
 
-        <hr className="border-stone-100" />
+        <hr className="border-stone-100 dark:border-stone-800" />
 
         {/* 2. Dietary Preferences Chips */}
         <DietaryChips selected={dietary} onChange={setDietary} />
 
-        <hr className="border-stone-100" />
+        <hr className="border-stone-100 dark:border-stone-800" />
 
         {/* 3. Cuisine & Time Preferences (2-column on tablet/desktop) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -195,7 +195,7 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
           <CookingTimeSelect value={maxCookingTime} onChange={setMaxCookingTime} />
         </div>
 
-        <hr className="border-stone-100" />
+        <hr className="border-stone-100 dark:border-stone-800" />
 
         {/* 4. Servings & Strict Mode */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
@@ -203,21 +203,21 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
           <StrictModeToggle strictMode={strictMode} onChange={setStrictMode} />
         </div>
 
-        <hr className="border-stone-100" />
+        <hr className="border-stone-100 dark:border-stone-800" />
 
         {/* 5. Additional Notes or Special Instructions */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-bold text-stone-800 flex items-center gap-1.5">
-              <FileText className="w-4 h-4 text-orange-600" />
+            <label className="text-sm font-bold text-stone-800 dark:text-stone-200 flex items-center gap-1.5">
+              <FileText className="w-4 h-4 text-orange-600 dark:text-orange-400" />
               <span>Additional Notes or Special Instructions</span>
-              <span className="text-xs font-normal text-stone-500">(Optional)</span>
+              <span className="text-xs font-normal text-stone-500 dark:text-stone-400">(Optional)</span>
             </label>
             {specialNotes.length > 0 && (
               <button
                 type="button"
                 onClick={() => setSpecialNotes("")}
-                className="text-xs text-stone-500 hover:text-stone-800 font-medium cursor-pointer"
+                className="text-xs text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 font-medium cursor-pointer"
               >
                 Clear
               </button>
@@ -228,14 +228,14 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
             onChange={(e) => setSpecialNotes(e.target.value)}
             rows={3}
             placeholder="e.g. I only have a little milk, make it less spicy, use less oil, kid-friendly, etc."
-            className="w-full px-4 py-3 rounded-2xl bg-white border border-stone-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 text-stone-800 placeholder-stone-400 text-sm outline-none resize-none transition-all shadow-xs"
+            className="w-full px-4 py-3 rounded-2xl bg-[var(--input-bg)] border border-[var(--input-border)] focus:border-orange-500 focus:ring-4 focus:ring-orange-100 dark:focus:ring-orange-950/40 text-stone-800 dark:text-stone-200 placeholder-stone-400 dark:placeholder-stone-500 text-sm outline-none resize-none transition-all shadow-xs"
           />
         </div>
 
         {/* Validation Error Banner */}
         {validationError && (
-          <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm font-semibold flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+          <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 text-rose-800 dark:text-rose-200 text-xs sm:text-sm font-semibold flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
             <span>{validationError}</span>
           </div>
         )}
@@ -252,7 +252,7 @@ export function RecipeForm({ onGenerate, isGenerating = false }: RecipeFormProps
             <UtensilsCrossed className="w-5 h-5 text-orange-200 group-hover:rotate-12 transition-transform duration-300" />
           </button>
 
-          <p className="text-center text-[11px] text-stone-500 mt-2.5">
+          <p className="text-center text-[11px] text-stone-500 dark:text-stone-400 mt-2.5">
             Varied cooking methods, textures & flavor profiles every generation.
           </p>
         </div>

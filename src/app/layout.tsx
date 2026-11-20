@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CookingProvider } from "@/context/CookingContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -44,9 +45,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans selection:bg-orange-200 selection:text-orange-950">
-        <CookingProvider>{children}</CookingProvider>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${jakarta.variable} ${playfair.variable} h-full antialiased`}
+    >
+      <head>
+        {/* Inline script to apply dark class before first paint — prevents theme flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('miw-theme');if(t==='dark'){document.documentElement.classList.add('dark');}else if(t==='light'){document.documentElement.classList.remove('dark');}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
+        <ThemeProvider>
+          <CookingProvider>{children}</CookingProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

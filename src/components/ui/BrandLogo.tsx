@@ -24,14 +24,14 @@ export function BrandLogo({ className = "" }: BrandLogoProps) {
       {/* Text Section */}
       <div className="flex flex-col text-left">
         <div className="flex items-baseline gap-1.5">
-          <span className="text-base sm:text-lg font-extrabold text-stone-900 tracking-tight leading-none" style={{ fontFamily: "var(--font-display)" }}>
+          <span className="text-base sm:text-lg font-extrabold text-stone-900 dark:text-stone-100 tracking-tight leading-none" style={{ fontFamily: "var(--font-display)" }}>
             Make It Work
           </span>
-          <span className="text-[10px] font-extrabold tracking-widest text-orange-600 bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200/70 px-1.5 py-0.5 rounded-md uppercase leading-none">
+          <span className="text-[10px] font-extrabold tracking-widest text-orange-600 bg-gradient-to-r from-orange-50 dark:from-orange-950/60 to-amber-50 dark:to-amber-950/60 border border-orange-200/70 dark:border-orange-800/50 px-1.5 py-0.5 rounded-md uppercase leading-none">
             Meals
           </span>
         </div>
-        <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-stone-400 uppercase mt-0.5">
+        <span className="text-[9px] sm:text-[10px] font-semibold tracking-wider text-stone-400 dark:text-stone-500 uppercase mt-0.5">
           Cooking Made Simple
         </span>
       </div>

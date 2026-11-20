@@ -197,7 +197,6 @@ OUTPUT SPECIFICATION:
 Return a valid JSON array of exactly 3 recipes matching this structure:
 [
   {
-    "id": "recipe-1",
     "title": "Creative Appetizing Dish Name",
     "description": "2-3 mouthwatering sentences describing the taste, textures, and technique.",
     "ingredients": [
@@ -247,9 +246,15 @@ function parseGeminiRecipeJson(rawText: string, filters: GenerationFilters): Rec
     const prep = Number(item.prepTime) || 10;
     const cook = Number(item.cookTime) || 15;
     const total = Number(item.totalTime) || prep + cook;
+    const titleSlug = (item.title || `meal-${index + 1}`)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 25);
+    const uniqueId = `rec_${titleSlug}_${Date.now()}_${index}_${Math.random().toString(36).substring(2, 7)}`;
 
     return {
-      id: item.id || `recipe-${Date.now()}-${index}-${Math.random().toString(36).substring(2, 6)}`,
+      id: uniqueId,
       title: item.title || `Delicious Meal #${index + 1}`,
       description: item.description || "A comforting meal made with your ingredients.",
       ingredients: Array.isArray(item.ingredients) ? item.ingredients : [],

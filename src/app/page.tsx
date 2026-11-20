@@ -89,7 +89,7 @@ function MainContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FCF9F2]">
+    <div className="min-h-screen flex flex-col bg-[var(--background)]">
       {currentView === "intro" ? (
         <IntroLanding
           onGetStarted={() => setCurrentView("form")}
@@ -130,7 +130,7 @@ function MainContent() {
                     <div className="flex items-center justify-center">
                       <button
                         onClick={() => setShowMealPlan(true)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-all active:scale-95 shadow-lg shadow-stone-900/20 cursor-pointer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 dark:border dark:border-stone-700 text-white font-bold text-sm transition-all active:scale-95 shadow-lg shadow-stone-900/20 cursor-pointer"
                       >
                         <Calendar className="w-4 h-4 text-orange-400" />
                         <span>📅 Generate Weekly Meal Plan</span>
@@ -155,7 +155,7 @@ function MainContent() {
                   <div className="flex items-center justify-center">
                     <button
                       onClick={() => setShowMealPlan(true)}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-bold text-sm transition-all active:scale-95 shadow-lg shadow-stone-900/20 cursor-pointer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 dark:border dark:border-stone-700 text-white font-bold text-sm transition-all active:scale-95 shadow-lg shadow-stone-900/20 cursor-pointer"
                     >
                       <Calendar className="w-4 h-4 text-orange-400" />
                       <span>📅 Generate Weekly Meal Plan</span>
@@ -194,7 +194,7 @@ export default function Home() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#FCF9F2] text-stone-500 font-semibold text-sm">
+        <div className="min-h-screen flex items-center justify-center bg-[var(--background)] text-stone-500 font-semibold text-sm">
           Loading Make It Work - Meals...
         </div>
       }

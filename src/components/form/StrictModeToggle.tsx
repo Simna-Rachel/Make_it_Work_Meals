@@ -14,35 +14,35 @@ export function StrictModeToggle({ strictMode, onChange }: StrictModeToggleProps
       onClick={() => onChange(!strictMode)}
       className={`relative p-4 rounded-2xl border transition-all cursor-pointer select-none active:scale-[0.99] ${
         strictMode
-          ? "bg-amber-50/80 border-amber-300 ring-2 ring-amber-300/30"
-          : "bg-white border-stone-200 hover:border-stone-300"
+          ? "bg-amber-50/80 dark:bg-amber-950/40 border-amber-300 dark:border-amber-700/60 ring-2 ring-amber-300/30"
+          : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-700/80 hover:border-stone-300 dark:hover:border-stone-600"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <div
             className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
-              strictMode ? "bg-amber-500 text-white" : "bg-stone-100 text-stone-500"
+              strictMode ? "bg-amber-500 text-white" : "bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400"
             }`}
           >
             {strictMode ? <Lock className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-stone-900">
+              <span className="text-sm font-bold text-stone-900 dark:text-stone-100">
                 Strict Mode (Only Listed Ingredients)
               </span>
               <span
                 className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full transition-colors ${
                   strictMode
-                    ? "bg-amber-200 text-amber-900"
-                    : "bg-stone-100 text-stone-500"
+                    ? "bg-amber-200 dark:bg-amber-900/60 text-amber-900 dark:text-amber-200"
+                    : "bg-stone-100 dark:bg-stone-800 text-stone-500 dark:text-stone-400"
                 }`}
               >
                 {strictMode ? "ON" : "OFF"}
               </span>
             </div>
-            <p className="text-xs text-stone-500 mt-1 leading-relaxed">
+            <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">
               {strictMode
                 ? "Active: The AI will strictly use only your listed items (+ water). No extra staples."
                 : "Off by default: The AI may suggest 1-2 common staples (e.g. olive oil, salt, garlic) if needed."}
@@ -55,7 +55,7 @@ export function StrictModeToggle({ strictMode, onChange }: StrictModeToggleProps
           role="switch"
           aria-checked={strictMode}
           className={`w-12 h-6 flex items-center rounded-full p-1 duration-300 shrink-0 cursor-pointer transition-colors ${
-            strictMode ? "bg-amber-500" : "bg-stone-300"
+            strictMode ? "bg-amber-500" : "bg-stone-300 dark:bg-stone-700"
           }`}
         >
           <div

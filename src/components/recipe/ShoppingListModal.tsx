@@ -108,27 +108,27 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
   const hasItems = items.length > 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 backdrop-blur-md bg-stone-900/60 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 backdrop-blur-md bg-stone-900/60 dark:bg-black/75 animate-in fade-in duration-200">
       <div
-        className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col max-h-[88vh]"
+        className="relative w-full max-w-lg bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col max-h-[88vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 bg-white border-b border-stone-100">
+        <div className="flex items-center justify-between px-6 py-5 bg-white dark:bg-stone-900 border-b border-stone-100 dark:border-stone-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-orange-100 flex items-center justify-center">
-              <ShoppingCart className="w-5 h-5 text-orange-600" />
+            <div className="w-10 h-10 rounded-2xl bg-orange-100 dark:bg-orange-950/60 flex items-center justify-center">
+              <ShoppingCart className="w-5 h-5 text-orange-600 dark:text-orange-400" />
             </div>
             <div>
-              <h2 className="text-lg font-black text-stone-900">Shopping List</h2>
-              <p className="text-xs text-stone-500">
+              <h2 className="text-lg font-black text-stone-900 dark:text-stone-100">Shopping List</h2>
+              <p className="text-xs text-stone-500 dark:text-stone-400">
                 {uncheckedCount} item{uncheckedCount !== 1 ? "s" : ""} needed
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 transition-colors cursor-pointer"
+            className="p-2 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-600 dark:text-stone-300 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -139,14 +139,14 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
           {/* No missing items info */}
           {!hasItems && (
             <div className="flex flex-col items-center justify-center py-10 text-center">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mb-4">
-                <CheckCheck className="w-8 h-8 text-emerald-600" />
+              <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center mb-4">
+                <CheckCheck className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
               </div>
-              <h3 className="font-bold text-stone-900 mb-1">You have everything!</h3>
-              <p className="text-sm text-stone-500 max-w-xs">
+              <h3 className="font-bold text-stone-900 dark:text-stone-100 mb-1">You have everything!</h3>
+              <p className="text-sm text-stone-500 dark:text-stone-400 max-w-xs">
                 None of your generated recipes require extra ingredients you don&apos;t already have.
               </p>
-              <p className="text-xs text-stone-400 mt-3">
+              <p className="text-xs text-stone-400 dark:text-stone-500 mt-3">
                 You can still add custom items below if needed.
               </p>
             </div>
@@ -156,8 +156,8 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
           {allMissing.length > 0 && (
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
-                <p className="text-xs font-bold text-amber-700 uppercase tracking-wide">
+                <AlertCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                <p className="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wide">
                   Missing from your kitchen ({allMissing.length})
                 </p>
               </div>
@@ -178,8 +178,8 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
           {customItems.length > 0 && (
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-stone-500" />
-                <p className="text-xs font-bold text-stone-500 uppercase tracking-wide">
+                <Sparkles className="w-3.5 h-3.5 text-stone-500 dark:text-stone-400" />
+                <p className="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wide">
                   Added by you ({customItems.length})
                 </p>
               </div>
@@ -198,7 +198,7 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
 
           {/* Add custom item */}
           <div className="space-y-2">
-            <p className="text-xs font-bold text-stone-500 uppercase tracking-wide">
+            <p className="text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wide">
               Add your own item
             </p>
             <div className="flex gap-2">
@@ -213,7 +213,7 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
                   }
                 }}
                 placeholder="e.g. 2 cups basmati rice"
-                className="flex-1 px-4 py-2.5 rounded-xl border border-stone-200 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 text-stone-800 placeholder-stone-400 text-sm outline-none transition-all"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 focus:border-orange-400 focus:ring-4 focus:ring-orange-100 dark:focus:ring-orange-950/40 text-stone-800 dark:text-stone-200 placeholder-stone-400 dark:placeholder-stone-500 text-sm outline-none transition-all"
               />
               <button
                 onClick={addCustomItem}
@@ -228,9 +228,9 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
         </div>
 
         {/* Footer actions */}
-        <div className="px-5 py-4 bg-stone-50 border-t border-stone-100 flex flex-col sm:flex-row items-center gap-2.5">
+        <div className="px-5 py-4 bg-stone-50 dark:bg-stone-900/90 border-t border-stone-100 dark:border-stone-800 flex flex-col sm:flex-row items-center gap-2.5">
           {copied && (
-            <div className="w-full sm:w-auto px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-800 text-xs font-semibold flex items-center gap-1.5">
+            <div className="w-full sm:w-auto px-4 py-2 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-full text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5" />
               Copied to clipboard!
             </div>
@@ -240,7 +240,7 @@ export function ShoppingListModal({ recipes, isOpen, onClose }: ShoppingListModa
             {items.some((i) => i.checked) && (
               <button
                 onClick={clearChecked}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-stone-200 text-stone-600 text-xs font-semibold hover:bg-stone-100 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 text-xs font-semibold hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 Clear checked
@@ -274,8 +274,8 @@ function ShoppingItemRow({
     <div
       className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
         item.checked
-          ? "bg-stone-50 border-stone-200"
-          : "bg-white border-stone-200 hover:border-orange-200 hover:bg-orange-50/20"
+          ? "bg-stone-50 dark:bg-stone-800/40 border-stone-200 dark:border-stone-800"
+          : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 hover:border-orange-200 dark:hover:border-orange-800/60 hover:bg-orange-50/20 dark:hover:bg-orange-950/20"
       }`}
     >
       <button
@@ -283,7 +283,7 @@ function ShoppingItemRow({
         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all cursor-pointer ${
           item.checked
             ? "bg-emerald-600 border-emerald-600"
-            : "border-stone-300 hover:border-orange-400"
+            : "border-stone-300 dark:border-stone-600 hover:border-orange-400"
         }`}
       >
         {item.checked && <CheckCheck className="w-3 h-3 text-white" />}
@@ -292,13 +292,13 @@ function ShoppingItemRow({
       <div className="flex-1 min-w-0">
         <span
           className={`text-sm font-medium transition-all ${
-            item.checked ? "line-through text-stone-400" : "text-stone-800"
+            item.checked ? "line-through text-stone-400 dark:text-stone-500" : "text-stone-800 dark:text-stone-200"
           }`}
         >
           {item.text}
         </span>
         {item.recipeTitle && !item.checked && (
-          <p className="text-[10px] text-stone-400 mt-0.5 truncate">
+          <p className="text-[10px] text-stone-400 dark:text-stone-500 mt-0.5 truncate">
             for {item.recipeTitle}
           </p>
         )}
@@ -306,7 +306,7 @@ function ShoppingItemRow({
 
       <button
         onClick={() => onRemove(item.id)}
-        className="p-1 rounded-lg text-stone-400 hover:text-rose-500 hover:bg-rose-50 transition-colors cursor-pointer flex-shrink-0"
+        className="p-1 rounded-lg text-stone-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer flex-shrink-0"
         title="Remove item"
       >
         <X className="w-3.5 h-3.5" />

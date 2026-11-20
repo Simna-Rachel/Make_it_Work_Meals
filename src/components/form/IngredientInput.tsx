@@ -86,9 +86,9 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-bold text-stone-800 flex items-center gap-1.5">
+        <label className="text-sm font-bold text-stone-800 dark:text-stone-200 flex items-center gap-1.5">
           <span>🥕 Your Ingredients</span>
-          <span className="text-xs font-normal text-stone-500">
+          <span className="text-xs font-normal text-stone-500 dark:text-stone-400">
             ({ingredients.length} added)
           </span>
         </label>
@@ -96,7 +96,7 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
           <button
             type="button"
             onClick={handleClearAll}
-            className="text-xs text-rose-600 hover:text-rose-700 font-medium transition-colors"
+            className="text-xs text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 font-medium transition-colors cursor-pointer"
           >
             Clear all
           </button>
@@ -114,13 +114,13 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
           }}
           onKeyDown={handleKeyDown}
           placeholder="e.g. 2 eggs, leftover chicken, bell pepper, rice..."
-          className="w-full px-4 py-3 sm:py-3.5 pr-24 rounded-2xl bg-white border border-stone-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 text-stone-800 placeholder-stone-400 text-sm sm:text-base outline-none transition-all shadow-xs"
+          className="w-full px-4 py-3 sm:py-3.5 pr-24 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-700/80 focus:border-orange-500 dark:focus:border-orange-500 focus:ring-4 focus:ring-orange-100 dark:focus:ring-orange-950/40 text-stone-800 dark:text-stone-200 placeholder-stone-400 dark:placeholder-stone-500 text-sm sm:text-base outline-none transition-all shadow-xs"
         />
         <button
           type="button"
           onClick={() => handleAdd(inputValue)}
           disabled={!inputValue.trim()}
-          className="absolute right-2 px-3.5 py-1.5 sm:py-2 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:bg-stone-200 disabled:text-stone-400 text-white font-semibold text-xs sm:text-sm flex items-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer disabled:cursor-not-allowed"
+          className="absolute right-2 px-3.5 py-1.5 sm:py-2 rounded-xl bg-orange-600 hover:bg-orange-700 disabled:bg-stone-200 dark:disabled:bg-stone-800 disabled:text-stone-400 dark:disabled:text-stone-600 text-white font-semibold text-xs sm:text-sm flex items-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer disabled:cursor-not-allowed"
         >
           <Plus className="w-4 h-4" />
           <span>Add</span>
@@ -129,7 +129,7 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
 
       {/* Error message */}
       {error && (
-        <p className="text-xs text-rose-600 flex items-center gap-1 font-medium">
+        <p className="text-xs text-rose-600 dark:text-rose-400 flex items-center gap-1 font-medium">
           <AlertCircle className="w-3.5 h-3.5" />
           <span>{error}</span>
         </p>
@@ -141,13 +141,13 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
           {ingredients.map((item, idx) => (
             <span
               key={`${item}-${idx}`}
-              className="group inline-flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-900 text-xs sm:text-sm font-semibold shadow-2xs animate-in fade-in zoom-in-95 duration-200"
+              className="group inline-flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded-full bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800/60 text-orange-900 dark:text-orange-200 text-xs sm:text-sm font-semibold shadow-2xs animate-in fade-in zoom-in-95 duration-200"
             >
               <span>{item}</span>
               <button
                 type="button"
                 onClick={() => handleRemove(idx)}
-                className="w-4 h-4 rounded-full flex items-center justify-center text-orange-500 hover:text-rose-600 hover:bg-orange-200/60 transition-colors"
+                className="w-4 h-4 rounded-full flex items-center justify-center text-orange-500 hover:text-rose-600 hover:bg-orange-200/60 dark:hover:bg-orange-900/60 transition-colors cursor-pointer"
                 title={`Remove ${item}`}
               >
                 <X className="w-3 h-3" />
@@ -156,14 +156,14 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
           ))}
         </div>
       ) : (
-        <p className="text-xs text-stone-600 italic">
+        <p className="text-xs text-stone-600 dark:text-stone-400 italic">
           Tip: Add whatever is sitting in your fridge, pantry, or counter. Even odd leftovers work!
         </p>
       )}
 
       {/* Quick Add Suggestions */}
-      <div className="pt-2 border-t border-stone-100">
-        <p className="text-xs font-semibold text-stone-600 mb-2">
+      <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+        <p className="text-xs font-semibold text-stone-600 dark:text-stone-400 mb-2">
           Tap to quickly add common staples:
         </p>
         <div className="flex flex-wrap gap-1.5">
@@ -177,10 +177,10 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
                 type="button"
                 onClick={() => !isAdded && handleAdd(item)}
                 disabled={isAdded}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-all ${
+                className={`text-xs px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
                   isAdded
-                    ? "bg-stone-100 text-stone-400 border-stone-200 cursor-not-allowed line-through"
-                    : "bg-white text-stone-700 border-stone-200 hover:border-orange-300 hover:bg-orange-50/60 hover:text-orange-900 active:scale-95"
+                    ? "bg-stone-100 dark:bg-stone-800/60 text-stone-400 dark:text-stone-500 border-stone-200 dark:border-stone-700/60 cursor-not-allowed line-through"
+                    : "bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-stone-200 dark:border-stone-700 hover:border-orange-300 dark:hover:border-orange-700 hover:bg-orange-50/60 dark:hover:bg-orange-950/40 hover:text-orange-900 dark:hover:text-orange-200 active:scale-95"
                 }`}
               >
                 + {item}
@@ -192,7 +192,7 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
 
       {/* Preset Ideas */}
       <div className="pt-2">
-        <p className="text-xs font-semibold text-stone-600 mb-1.5 flex items-center gap-1">
+        <p className="text-xs font-semibold text-stone-600 dark:text-stone-400 mb-1.5 flex items-center gap-1">
           <Sparkles className="w-3 h-3 text-amber-500" />
           <span>Or try a quick combo:</span>
         </p>
@@ -202,7 +202,7 @@ export function IngredientInput({ ingredients, onChange }: IngredientInputProps)
               key={preset.name}
               type="button"
               onClick={() => applyPreset(preset.items)}
-              className="text-xs px-3 py-1.5 rounded-xl bg-stone-100/90 hover:bg-stone-200/80 border border-stone-200 text-stone-700 font-medium transition-colors active:scale-95"
+              className="text-xs px-3 py-1.5 rounded-xl bg-stone-100/90 dark:bg-stone-800 hover:bg-stone-200/80 dark:hover:bg-stone-700 border border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300 font-medium transition-colors active:scale-95 cursor-pointer"
             >
               {preset.name}
             </button>

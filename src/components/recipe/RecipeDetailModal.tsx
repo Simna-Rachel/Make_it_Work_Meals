@@ -101,22 +101,20 @@ export function RecipeDetailModal({
       .map((i) => `• ${i}`)
       .join("\n")}\n\nINSTRUCTIONS:\n${recipe.instructions
       .map((step, idx) => `${idx + 1}. ${step}`)
-      .join("\n")}${
-      recipe.missingIngredients?.length
-        ? `\n\nSHOPPING LIST NEEDED:\n${recipe.missingIngredients.map((i) => `• ${i}`).join("\n")}`
-        : ""
-    }`;
+      .join("\n")}`;
+
     navigator.clipboard.writeText(text);
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2500);
   };
 
-  const handlePrint = () => window.print();
+  const handlePrint = () => {
+    window.print();
+  };
 
   const handleStartCooking = () => {
     startCooking(recipe);
     setStartedCooking(true);
-    onClose(); // close modal; the CookingBar takes over
   };
 
   const scale = recipe.servings ? servings / recipe.servings : 1;
@@ -201,24 +199,24 @@ export function RecipeDetailModal({
       </div>
 
       {/* ======= INTERACTIVE MODAL ======= */}
-      <div className="recipe-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto backdrop-blur-md bg-stone-900/60 animate-in fade-in duration-200 print-hide">
+      <div className="recipe-modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto backdrop-blur-md bg-stone-900/60 dark:bg-black/75 animate-in fade-in duration-200 print-hide">
         <div
-          className="recipe-modal-container relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden my-auto max-h-[92vh] flex flex-col"
+          className="recipe-modal-container relative w-full max-w-2xl bg-white dark:bg-stone-900 rounded-3xl shadow-2xl border border-stone-200 dark:border-stone-800 overflow-hidden my-auto max-h-[92vh] flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Top Header Bar */}
-          <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-white/95 backdrop-blur-sm border-b border-stone-100 print-hide">
+          <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-white/95 dark:bg-stone-900/95 backdrop-blur-sm border-b border-stone-100 dark:border-stone-800 print-hide">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800">
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-orange-100 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300">
                 {recipe.difficulty}
               </span>
               {recipe.cuisine && (
-                <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-600">
+                <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">
                   {recipe.cuisine}
                 </span>
               )}
               {isActiveSession && (
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 flex items-center gap-1">
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Cooking
                 </span>
@@ -230,8 +228,8 @@ export function RecipeDetailModal({
                 onClick={handleFavorite}
                 className={`p-2 rounded-full border transition-colors cursor-pointer ${
                   isFavorite
-                    ? "bg-rose-50 border-rose-200 text-rose-600"
-                    : "bg-white border-stone-200 text-stone-500 hover:text-stone-800"
+                    ? "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800/60 text-rose-600 dark:text-rose-400"
+                    : "bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200"
                 }`}
                 title={isFavorite ? "Remove favorite" : "Save to favorites"}
               >
@@ -239,21 +237,21 @@ export function RecipeDetailModal({
               </button>
               <button
                 onClick={handleCopy}
-                className="p-2 rounded-full bg-white border border-stone-200 text-stone-500 hover:text-stone-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors cursor-pointer"
                 title="Copy recipe text"
               >
                 <Copy className="w-5 h-5" />
               </button>
               <button
                 onClick={handlePrint}
-                className="p-2 rounded-full bg-white border border-stone-200 text-stone-500 hover:text-stone-800 transition-colors cursor-pointer"
+                className="p-2 rounded-full bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors cursor-pointer"
                 title="Print recipe"
               >
                 <Printer className="w-5 h-5" />
               </button>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 hover:text-stone-900 transition-colors cursor-pointer ml-1"
+                className="p-2 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 transition-colors cursor-pointer ml-1"
                 title="Close"
               >
                 <X className="w-5 h-5" />
@@ -265,39 +263,39 @@ export function RecipeDetailModal({
           <div className="recipe-modal-scroll p-6 overflow-y-auto space-y-6">
             {/* Copied Banner */}
             {copied && (
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-xs font-semibold flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-xl text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Recipe copied to clipboard!</span>
               </div>
             )}
 
             {/* Title & Description */}
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-100 tracking-tight leading-tight">
                 {recipe.title}
               </h2>
-              <p className="mt-2 text-stone-600 text-sm sm:text-base leading-relaxed">
+              <p className="mt-2 text-stone-600 dark:text-stone-300 text-sm sm:text-base leading-relaxed">
                 {recipe.description}
               </p>
             </div>
 
             {/* Metrics summary banner */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/60">
-              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 shadow-2xs">
-                <span className="text-[10px] text-stone-600 uppercase font-semibold">Prep</span>
-                <span className="font-bold text-stone-800 text-sm">{recipe.prepTime} mins</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3.5 rounded-2xl bg-amber-50/70 dark:bg-stone-800/60 border border-amber-200/60 dark:border-stone-700/60">
+              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 dark:bg-stone-900/80 shadow-2xs">
+                <span className="text-[10px] text-stone-600 dark:text-stone-400 uppercase font-semibold">Prep</span>
+                <span className="font-bold text-stone-800 dark:text-stone-200 text-sm">{recipe.prepTime} mins</span>
               </div>
-              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 shadow-2xs">
-                <span className="text-[10px] text-stone-600 uppercase font-semibold">Cook</span>
-                <span className="font-bold text-stone-800 text-sm">{recipe.cookTime} mins</span>
+              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 dark:bg-stone-900/80 shadow-2xs">
+                <span className="text-[10px] text-stone-600 dark:text-stone-400 uppercase font-semibold">Cook</span>
+                <span className="font-bold text-stone-800 dark:text-stone-200 text-sm">{recipe.cookTime} mins</span>
               </div>
-              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 shadow-2xs">
-                <span className="text-[10px] text-stone-600 uppercase font-semibold">Calories</span>
-                <span className="font-bold text-amber-700 text-sm">{recipe.approximateCalories} kcal</span>
+              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 dark:bg-stone-900/80 shadow-2xs">
+                <span className="text-[10px] text-stone-600 dark:text-stone-400 uppercase font-semibold">Calories</span>
+                <span className="font-bold text-amber-700 dark:text-amber-400 text-sm">{recipe.approximateCalories} kcal</span>
               </div>
-              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 shadow-2xs">
-                <span className="text-[10px] text-stone-600 uppercase font-semibold">Protein</span>
-                <span className="font-bold text-emerald-700 text-sm">{recipe.approximateProtein}</span>
+              <div className="flex flex-col items-center justify-center p-2 rounded-xl bg-white/80 dark:bg-stone-900/80 shadow-2xs">
+                <span className="text-[10px] text-stone-600 dark:text-stone-400 uppercase font-semibold">Protein</span>
+                <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">{recipe.approximateProtein}</span>
               </div>
             </div>
 
@@ -312,9 +310,9 @@ export function RecipeDetailModal({
                 <Sparkles className="w-4 h-4 text-amber-200 animate-pulse" />
               </button>
             ) : (
-              <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center gap-3">
+              <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-3">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <p className="text-xs font-bold text-emerald-800">
+                <p className="text-xs font-bold text-emerald-800 dark:text-emerald-300">
                   Cooking session active! Timer &amp; progress are saved in the bar below — even if you close this window.
                 </p>
               </div>
@@ -322,12 +320,12 @@ export function RecipeDetailModal({
 
             {/* Missing Ingredients Warning if any */}
             {recipe.missingIngredients && recipe.missingIngredients.length > 0 && (
-              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+              <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60">
                 <div className="flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="text-xs font-bold text-amber-900">Additional Staples Suggested:</p>
-                    <p className="text-xs text-amber-800 mt-0.5">
+                    <p className="text-xs font-bold text-amber-900 dark:text-amber-200">Additional Staples Suggested:</p>
+                    <p className="text-xs text-amber-800 dark:text-amber-300 mt-0.5">
                       This recipe also uses: {recipe.missingIngredients.join(", ")}.
                     </p>
                   </div>
@@ -338,24 +336,24 @@ export function RecipeDetailModal({
             {/* Ingredients Section */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-bold text-stone-900 flex items-center gap-2">
+                <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 flex items-center gap-2">
                   <span>Ingredients</span>
-                  <span className="text-xs font-normal text-stone-600">
+                  <span className="text-xs font-normal text-stone-600 dark:text-stone-400">
                     ({Object.values(checkedIngredients).filter(Boolean).length}/{recipe.ingredients.length} ready)
                   </span>
                 </h3>
-                <div className="flex items-center gap-2 text-xs font-semibold text-stone-600">
-                  <Users className="w-3.5 h-3.5 text-stone-600" />
+                <div className="flex items-center gap-2 text-xs font-semibold text-stone-600 dark:text-stone-400">
+                  <Users className="w-3.5 h-3.5 text-stone-600 dark:text-stone-400" />
                   <button
                     onClick={() => setServings((s) => Math.max(1, s - 1))}
-                    className="w-5 h-5 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold cursor-pointer"
+                    className="w-5 h-5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 flex items-center justify-center font-bold cursor-pointer"
                   >
                     -
                   </button>
                   <span>{servings} servings</span>
                   <button
                     onClick={() => setServings((s) => Math.min(10, s + 1))}
-                    className="w-5 h-5 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold cursor-pointer"
+                    className="w-5 h-5 rounded-full bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 flex items-center justify-center font-bold cursor-pointer"
                   >
                     +
                   </button>
@@ -371,15 +369,15 @@ export function RecipeDetailModal({
                       onClick={() => toggleIngredient(idx)}
                       className={`flex items-center gap-3 p-3 rounded-xl border transition-all cursor-pointer select-none ${
                         isChecked
-                          ? "bg-stone-50 border-stone-200 text-stone-600 line-through"
-                          : "bg-white border-stone-200/90 text-stone-800 hover:border-orange-200 hover:bg-orange-50/30"
+                          ? "bg-stone-50 dark:bg-stone-800/40 border-stone-200 dark:border-stone-800 text-stone-400 dark:text-stone-500 line-through"
+                          : "bg-white dark:bg-stone-900 border-stone-200/90 dark:border-stone-800 text-stone-800 dark:text-stone-200 hover:border-orange-200 dark:hover:border-orange-800/60 hover:bg-orange-50/30 dark:hover:bg-orange-950/20"
                       }`}
                     >
                       <input
                         type="checkbox"
                         checked={!!isChecked}
                         onChange={() => toggleIngredient(idx)}
-                        className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-stone-300"
+                        className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-stone-300 dark:border-stone-600"
                       />
                       <span className="text-xs sm:text-sm font-medium">
                         {scale !== 1 ? `${ing} (scaled for ${servings})` : ing}
@@ -392,10 +390,10 @@ export function RecipeDetailModal({
 
             {/* Instructions Section */}
             <div className="space-y-3">
-              <h3 className="text-base font-bold text-stone-900 flex items-center gap-2">
+              <h3 className="text-base font-bold text-stone-900 dark:text-stone-100 flex items-center gap-2">
                 Step-by-Step Instructions
                 {stepsCompleted > 0 && (
-                  <span className="text-xs font-normal text-stone-500">
+                  <span className="text-xs font-normal text-stone-500 dark:text-stone-400">
                     ({stepsCompleted}/{recipe.instructions.length} done)
                   </span>
                 )}
@@ -410,20 +408,20 @@ export function RecipeDetailModal({
                       onClick={() => toggleStep(idx)}
                       className={`flex items-start gap-3.5 p-4 rounded-2xl border transition-all cursor-pointer select-none ${
                         isDone
-                          ? "bg-emerald-50/50 border-emerald-200 text-stone-600"
-                          : "bg-white border-stone-200/90 hover:border-stone-300"
+                          ? "bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800/40 text-stone-400 dark:text-stone-500"
+                          : "bg-white dark:bg-stone-900 border-stone-200/90 dark:border-stone-800 hover:border-stone-300 dark:hover:border-stone-700"
                       }`}
                     >
                       <div
                         className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 ${
-                          isDone ? "bg-emerald-600 text-white" : "bg-orange-100 text-orange-800"
+                          isDone ? "bg-emerald-600 text-white" : "bg-orange-100 dark:bg-orange-950/60 text-orange-800 dark:text-orange-300"
                         }`}
                       >
                         {isDone ? <CheckCircle2 className="w-4 h-4" /> : idx + 1}
                       </div>
                       <p
                         className={`text-xs sm:text-sm leading-relaxed ${
-                          isDone ? "line-through text-stone-600" : "text-stone-800 font-medium"
+                          isDone ? "line-through text-stone-400 dark:text-stone-500" : "text-stone-800 dark:text-stone-200 font-medium"
                         }`}
                       >
                         {step}
@@ -436,10 +434,10 @@ export function RecipeDetailModal({
           </div>
 
           {/* Modal Bottom Actions */}
-          <div className="px-6 py-4 bg-stone-50 border-t border-stone-100 flex items-center justify-between print-hide">
+          <div className="px-6 py-4 bg-stone-50 dark:bg-stone-900/90 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between print-hide">
             <button
               onClick={handleFavorite}
-              className="flex items-center gap-2 text-xs sm:text-sm font-bold text-rose-600 hover:text-rose-700 cursor-pointer"
+              className="flex items-center gap-2 text-xs sm:text-sm font-bold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 cursor-pointer"
             >
               <Heart className={`w-4 h-4 ${isFavorite ? "fill-rose-500" : ""}`} />
               <span>{isFavorite ? "Saved in Favorites" : "Save to Favorites"}</span>
@@ -447,7 +445,7 @@ export function RecipeDetailModal({
 
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs sm:text-sm cursor-pointer transition-colors shadow-xs"
+              className="px-5 py-2.5 rounded-full bg-stone-900 hover:bg-stone-800 dark:bg-stone-800 dark:hover:bg-stone-700 text-white font-bold text-xs sm:text-sm cursor-pointer transition-colors shadow-xs"
             >
               {isActiveSession ? "Minimize — Keep Cooking" : "Close"}
             </button>

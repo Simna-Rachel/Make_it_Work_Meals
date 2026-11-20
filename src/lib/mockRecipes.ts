@@ -46,7 +46,7 @@ export function generateMockRecipes(filters: GenerationFilters): Recipe[] {
 
   return [
     {
-      id: `mock-1-${Date.now()}`,
+      id: `rec_${randomizedStyles[0].titlePrefix.toLowerCase()}-${capitalize(mainIng1).toLowerCase()}_${Date.now()}_1_${Math.random().toString(36).substring(2, 7)}`,
       title: `${randomizedStyles[0].titlePrefix} ${capitalize(mainIng1)} Medley`,
       description: `A fragrant, crispy skillet dish showcasing ${mainIng1} and ${mainIng2}. ${randomizedStyles[0].technique}. Comforting, quick, and full of natural umami.`,
       ingredients: [
@@ -78,7 +78,7 @@ export function generateMockRecipes(filters: GenerationFilters): Recipe[] {
       missingIngredients: missingStaples.slice(0, 1),
     },
     {
-      id: `mock-2-${Date.now()}`,
+      id: `rec_${randomizedStyles[1].titlePrefix.toLowerCase()}-${capitalize(mainIng2 || mainIng1).toLowerCase()}_${Date.now()}_2_${Math.random().toString(36).substring(2, 7)}`,
       title: `${randomizedStyles[1].titlePrefix} ${capitalize(mainIng2 || mainIng1)} Broth Bowl`,
       description: `An energized, wholesome bowl built around ${mainIng1} and warm aromatic spices. ${randomizedStyles[1].technique}. Perfect for a cozy meal.`,
       ingredients: [
@@ -110,7 +110,7 @@ export function generateMockRecipes(filters: GenerationFilters): Recipe[] {
       missingIngredients: missingStaples.slice(1, 2),
     },
     {
-      id: `mock-3-${Date.now()}`,
+      id: `rec_${randomizedStyles[2].titlePrefix.toLowerCase()}-${capitalize(mainIng1).toLowerCase()}_${Date.now()}_3_${Math.random().toString(36).substring(2, 7)}`,
       title: `${randomizedStyles[2].titlePrefix} ${capitalize(mainIng1)} Savory Hash`,
       description: `A fast, satisfying preparation designed to caramelize fridge ingredients. ${randomizedStyles[2].technique}. Minimal cleanup, maximum flavor.`,
       ingredients: [

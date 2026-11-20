@@ -42,9 +42,9 @@ export function DietaryChips({ selected, onChange }: DietaryChipsProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <label className="text-sm font-bold text-stone-800 flex items-center gap-1.5">
+        <label className="text-sm font-bold text-stone-800 dark:text-stone-200 flex items-center gap-1.5">
           <span>🥗 Dietary Preferences</span>
-          <span className="text-xs font-normal text-stone-500">
+          <span className="text-xs font-normal text-stone-500 dark:text-stone-400">
             {selected.length === 0 ? "(None selected)" : `(${selected.length} selected)`}
           </span>
         </label>
@@ -52,7 +52,7 @@ export function DietaryChips({ selected, onChange }: DietaryChipsProps) {
           <button
             type="button"
             onClick={() => onChange([])}
-            className="text-xs text-stone-500 hover:text-stone-800 font-medium"
+            className="text-xs text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 font-medium cursor-pointer"
           >
             Clear
           </button>
@@ -70,8 +70,8 @@ export function DietaryChips({ selected, onChange }: DietaryChipsProps) {
               onClick={() => handleToggle(opt.id)}
               className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm font-medium transition-all text-left cursor-pointer active:scale-95 ${
                 isSelected
-                  ? "bg-emerald-50 border-emerald-500 text-emerald-950 font-semibold ring-2 ring-emerald-400/20 shadow-xs"
-                  : "bg-white border-stone-200 text-stone-700 hover:border-stone-300 hover:bg-stone-50/60"
+                  ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-500 dark:border-emerald-600 text-emerald-950 dark:text-emerald-200 font-semibold ring-2 ring-emerald-400/20 shadow-xs"
+                  : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-700/80 text-stone-700 dark:text-stone-300 hover:border-stone-300 dark:hover:border-stone-600 hover:bg-stone-50/60 dark:hover:bg-stone-800/60"
               }`}
             >
               <div className="flex items-center gap-2 truncate">
@@ -80,7 +80,7 @@ export function DietaryChips({ selected, onChange }: DietaryChipsProps) {
               </div>
               <div
                 className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ml-1.5 transition-colors ${
-                  isSelected ? "bg-emerald-600 text-white" : "border border-stone-300"
+                  isSelected ? "bg-emerald-600 text-white" : "border border-stone-300 dark:border-stone-600"
                 }`}
               >
                 {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}

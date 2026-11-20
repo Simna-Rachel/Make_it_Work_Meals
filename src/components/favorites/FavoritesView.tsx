@@ -8,6 +8,7 @@ import { Heart, Search, ArrowLeft, Trash2, Utensils } from "lucide-react";
 
 interface FavoritesViewProps {
   favorites: Recipe[];
+  isFavorite?: (target: string | Recipe) => boolean;
   onRemoveFavorite: (id: string) => void;
   onToggleFavorite: (recipe: Recipe) => void;
   onBackToApp: () => void;
@@ -16,6 +17,7 @@ interface FavoritesViewProps {
 
 export function FavoritesView({
   favorites,
+  isFavorite,
   onRemoveFavorite,
   onToggleFavorite,
   onBackToApp,
@@ -37,22 +39,22 @@ export function FavoritesView({
   return (
     <div className="w-full max-w-6xl mx-auto px-4 py-6 space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-stone-200 dark:border-stone-800">
         <div>
           <button
             onClick={onBackToApp}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-stone-600 hover:text-stone-900 mb-2 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 mb-2 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Generator</span>
           </button>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight flex items-center gap-2.5">
+            <h2 className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-stone-100 tracking-tight flex items-center gap-2.5">
               <span>Your Favorite Recipes</span>
               <Heart className="w-6 h-6 text-rose-500 fill-rose-500" />
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-stone-600 mt-1">
+          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-400 mt-1">
             {favorites.length} saved {favorites.length === 1 ? "recipe" : "recipes"} stored locally on your device.
           </p>
         </div>
@@ -65,7 +67,7 @@ export function FavoritesView({
                   onClearAll();
                 }
               }}
-              className="px-3 py-1.5 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-xl border border-rose-200 dark:border-rose-800/60 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Clear All</span>
@@ -83,19 +85,19 @@ export function FavoritesView({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search your saved recipes by ingredient or title..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-stone-200 text-sm text-stone-800 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-sm text-stone-800 dark:text-stone-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 dark:focus:ring-orange-950/40 outline-none"
           />
         </div>
       )}
 
       {/* Empty State */}
       {favorites.length === 0 ? (
-        <div className="max-w-md mx-auto my-16 text-center space-y-4 p-8 rounded-3xl bg-white border border-stone-200 shadow-sm">
-          <div className="w-16 h-16 rounded-full bg-rose-50 mx-auto flex items-center justify-center text-rose-500">
+        <div className="max-w-md mx-auto my-16 text-center space-y-4 p-8 rounded-3xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-rose-50 dark:bg-rose-950/40 mx-auto flex items-center justify-center text-rose-500 dark:text-rose-400">
             <Heart className="w-8 h-8" />
           </div>
-          <h3 className="text-xl font-bold text-stone-900">No Saved Recipes Yet</h3>
-          <p className="text-sm text-stone-600 leading-relaxed">
+          <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">No Saved Recipes Yet</h3>
+          <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
             Whenever you generate recipes, tap the heart icon on any card to save your favorite dishes here for quick cooking anytime.
           </p>
           <button
@@ -107,7 +109,7 @@ export function FavoritesView({
         </div>
       ) : filteredFavorites.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-stone-500 text-sm">No recipes match &quot;{searchQuery}&quot;</p>
+          <p className="text-stone-500 dark:text-stone-400 text-sm">No recipes match &quot;{searchQuery}&quot;</p>
         </div>
       ) : (
         /* Favorites Grid */

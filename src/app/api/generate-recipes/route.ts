@@ -27,6 +27,26 @@ export async function POST(req: NextRequest) {
 
     // Call Gemini exclusively from the server
     const result = await fetchRecipesFromGemini(filters, serverSecretKey);
+
+    // Guarantee each returned recipe has a strictly unique, non-index ID
+    if (result && Array.isArray(result.recipes)) {
+      result.recipes = result.recipes.map((r, i) => {
+        const titleSlug = (r.title || `dish-${i + 1}`)
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 25);
+        // If the ID is a legacy index-based ID or missing, generate a unique one
+        const isLegacy = !r.id || /^(recipe-[1-9]\d*|mock-[1-9]\d*|\d+)$/i.test(r.id);
+        return {
+          ...r,
+          id: isLegacy
+            ? `rec_${titleSlug}_${Date.now()}_${i}_${Math.random().toString(36).substring(2, 7)}`
+            : r.id,
+        };
+      });
+    }
+
     return NextResponse.json(result);
   } catch (error: any) {
     console.error("Server-side recipe generation error:", error);
